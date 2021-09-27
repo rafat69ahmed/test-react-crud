@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import PageHeader from 'component/common/pageHeader'
 import Container from 'component/layout/container'
 import { Form, Input, Button, message, Row, Col } from 'antd'
-import useHttp from 'hook/useHttp'
+// import useHttp from 'hook/useHttp'
 import dayjs from 'dayjs'
+import { v4 as uuidv4 } from 'uuid'
 
 const ContactCreate = () => {
     const formItemLayout = {
@@ -37,47 +38,11 @@ const ContactCreate = () => {
         }
     }
     const [form] = Form.useForm()
-    const { http } = useHttp()
+    // const { http } = useHttp()
     const contacts = JSON.parse(localStorage.getItem('list')) || []
 
-    const addUserData = (values, responseData) => {
-        console.log('Received values of form: ', values)
-        console.log('response from 1st call: ', responseData)
-        const url = `https://firestore.googleapis.com/v1/projects/thefeelgoodfactory-c0649/databases/(default)/documents/users/${responseData.localId}`
-        const query = {
-            fields: {
-                user_type: {
-                    stringValue: 'client'
-                },
-                is_approved: {
-                    booleanValue: false
-                },
-                email: {
-                    stringValue: values.email
-                },
-                remaining_hours: {
-                    doubleValue: 0
-                },
-                name: {
-                    stringValue: values.name
-                },
-                is_enable_push_notification: {
-                    booleanValue: true
-                },
-                uid: {
-                    stringValue: responseData.localId
-                }
-            }
-        }
-        http.patch(url, query)
-            .then((res) => {
-                console.log('user data updated', res.data)
-                message.success('user created successfully')
-            })
-            .catch((err) => console.log(err))
-    }
-
     const onFinish = (values) => {
+        values['uid'] = uuidv4()
         values['created_at'] = new Date().toLocaleDateString()
         values['updated_at'] = null
         console.log('Received values of form: ', values)

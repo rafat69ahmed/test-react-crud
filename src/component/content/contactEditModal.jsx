@@ -1,22 +1,23 @@
 import React, { useEffect } from 'react'
-import useHttp from 'hook/useHttp'
+// import useHttp from 'hook/useHttp'
 import Container from 'component/layout/container'
 import { Modal, Form, Input, message, Row, Col } from 'antd'
 
-const ContactEditModal = ({ isOpen, setIsOpen, activeClient, getUsers }) => {
+const ContactEditModal = ({ isOpen, setIsOpen, activeClient, getUsers, users, setUsers }) => {
     const [form] = Form.useForm()
-    const { http } = useHttp()
-    const [confirmLoading, setConfirmLoading] = React.useState(false)
+    // const { http } = useHttp()
+    // const [confirmLoading, setConfirmLoading] = React.useState(false)
     useEffect(() => {
         form.setFieldsValue({
             name: activeClient.name,
             phone: activeClient.phone,
             company: activeClient.company,
-            address: activeClient.address
+            address: activeClient.address,
+            uid: activeClient.uid
         })
     }, [activeClient])
     const handleOk = () => {
-        setConfirmLoading(true)
+        // setConfirmLoading(true)
         form.submit()
         // form.resetFields()
     }
@@ -25,10 +26,19 @@ const ContactEditModal = ({ isOpen, setIsOpen, activeClient, getUsers }) => {
         setIsOpen(false)
     }
     const onFinish = (values) => {
-        // console.log('selected', selectedSkills)
+        console.log('selected', values, activeClient.uid, users)
+        setUsers((users) =>
+            users.map((user) => {
+                if (user.uid === activeClient.uid) {
+                    return { uid: activeClient.uid, ...values }
+                }
+                return user
+            })
+        )
+        setIsOpen(false)
     }
     const onFinishFailed = () => {
-        setConfirmLoading(false)
+        // setConfirmLoading(false)
     }
     const formItemLayout = {
         labelCol: {
@@ -45,10 +55,10 @@ const ContactEditModal = ({ isOpen, setIsOpen, activeClient, getUsers }) => {
     return (
         <div>
             <Modal
-                title="Trainer edit modal "
+                title="Contact edit modal "
                 visible={isOpen}
                 onOk={handleOk}
-                confirmLoading={confirmLoading}
+                // confirmLoading={confirmLoading}
                 onCancel={handleCancel}>
                 <Container>
                     <Row>

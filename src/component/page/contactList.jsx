@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react'
 import PageHeader from 'component/common/pageHeader'
 import Container from 'component/layout/container'
-import useHttp from 'hook/useHttp'
+// import useHttp from 'hook/useHttp'
 import { Table, Modal, Divider, Input, Button, Space } from 'antd'
-import dayjs from 'dayjs'
+// import dayjs from 'dayjs'
 import ContactEditModal from 'component/content/contactEditModal'
 import { SearchOutlined } from '@ant-design/icons'
 import Highlighter from 'react-highlight-words'
@@ -14,12 +14,13 @@ const processUserData = (usersResponse) =>
         if (user) {
             console.log('testo', user)
             const resultArr = {
-                id: index + 1,
+                // id: index + 1,
                 name: user?.name || 'N/A',
                 phone: user?.phone || 'N/A',
                 company: user?.company || 'N/A',
                 address: user?.address || 'N/A',
-                created_at: user?.created_at || 'N/A'
+                created_at: user?.created_at || 'N/A',
+                uid: user?.uid || 'N/A'
             }
             return resultArr
         }
@@ -27,7 +28,7 @@ const processUserData = (usersResponse) =>
     })
 
 const ContactList = () => {
-    const { http } = useHttp()
+    // const { http } = useHttp()
     const [users, setUsers] = useState([])
     const [loading, setLoading] = useState(false)
     const [isEditModalVisible, setIsEditModalVisible] = useState(false)
@@ -60,9 +61,7 @@ const ContactList = () => {
     const handleDeleteOk = () => {
         console.log('full list', users)
         console.log('receive client', activeClient)
-        setUsers((users) => users.filter((user) => user.id !== activeClient.id)).then(() => {
-            localStorage.setItem('list', JSON.stringify(users))
-        })
+        setUsers((users) => users.filter((user) => user.uid !== activeClient.uid))
         console.log('after delete', users)
         setIsDeleteModalVisible(false)
         setActiveClient('')
@@ -87,6 +86,10 @@ const ContactList = () => {
         // console.log('hello bello', data)
         getUsers()
     }, [])
+
+    useEffect(() => {
+        localStorage.setItem('list', JSON.stringify(users))
+    }, [users])
     const columns = [
         {
             title: 'Name',
@@ -215,12 +218,14 @@ const ContactList = () => {
                     setIsOpen={setIsEditModalVisible}
                     activeClient={activeClient}
                     getUsers={getUsers}
+                    users={users}
+                    setUsers={setUsers}
                 />
                 <Modal
                     title="delete modal"
                     visible={isDeleteModalVisible}
                     onOk={handleDeleteOk}
-                    confirmLoading={confirmLoading}
+                    // confirmLoading={confirmLoading}
                     onCancel={handleCancel}>
                     <p>Are you sure you want to approve this contact?</p>
                 </Modal>

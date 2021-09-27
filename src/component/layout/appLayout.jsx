@@ -46,7 +46,7 @@ const AppLayout = ({ children }) => {
         <Layout>
             <Header className="header" style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Title level={3} style={headerStyle}>
-                    The Feel Good Factory
+                    contact app
                 </Title>
 
                 <Menu theme="dark" mode="horizontal">
@@ -55,17 +55,6 @@ const AppLayout = ({ children }) => {
                             Logout
                         </Menu.Item>
                     </SubMenu> */}
-                    <SubMenu
-                        key="SubMenu"
-                        // icon={<SettingOutlined />}
-                        title="Navigation Three - Submenu">
-                        <Menu.Item key="setting:1" onClick={handleContactList}>
-                            contact list
-                        </Menu.Item>
-                        <Menu.Item key="setting:2" onclick={handleContactCreate}>
-                            contact create
-                        </Menu.Item>
-                    </SubMenu>
                 </Menu>
             </Header>
             <Layout>
@@ -74,7 +63,7 @@ const AppLayout = ({ children }) => {
                         mode="inline"
                         defaultSelectedKeys={['1']}
                         style={{ height: '100%', borderRight: 0 }}>
-                        <SubMenu key="sub1" title="Trainers">
+                        {/* <SubMenu key="sub1" title="Trainers">
                             <Menu.Item key="1">
                                 <Link to="/trainer-list">Trainer List</Link>
                             </Menu.Item>
@@ -84,24 +73,24 @@ const AppLayout = ({ children }) => {
                             <Menu.Item key="3">
                                 <Link to="/trainer-create">Create Trainer</Link>
                             </Menu.Item>
-                        </SubMenu>
+                        </SubMenu> */}
                         {/* <Menu.Item key="8">Purchase History</Menu.Item> */}
-                        <SubMenu key="sub2" title="Clients">
+                        {/* <SubMenu key="sub2" title="Clients">
                             <Menu.Item key="4">
                                 <Link to="/contacts">contact List</Link>
                             </Menu.Item>
                             <Menu.Item key="5">
                                 <Link to="/client-create">Create Client</Link>
                             </Menu.Item>
-                        </SubMenu>
+                        </SubMenu> */}
                         {/* <SubMenu key="sub3" title="Bookings">
                         </SubMenu> */}
-                        <Menu.Item key="6">
+                        {/* <Menu.Item key="6">
                             <Link to="/booking-list">Booking List</Link>
                         </Menu.Item>
                         <Menu.Item key="7">
                             <Link to="/purchase-history-list">Purchase History</Link>
-                        </Menu.Item>
+                        </Menu.Item> */}
                         <Menu.Item key="9">
                             <Link to="/contacts">contact List</Link>
                         </Menu.Item>

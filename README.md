@@ -14,17 +14,6 @@ yarn start
 
 For building an optimized production version
 
-```
-yarn build
-```
-
-For checking eslint issue,
-
-```
-yarn lint
-
-```
-
 # Prettier Code formatting with vscode
 
 Install Eslint & Prettier extensions. If format on save is not working, follow these steps:
