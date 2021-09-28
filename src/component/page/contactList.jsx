@@ -2,9 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import PageHeader from 'component/common/pageHeader'
 import Container from 'component/layout/container'
-// import useHttp from 'hook/useHttp'
 import { Table, Modal, Divider, Input, Button, Space } from 'antd'
-// import dayjs from 'dayjs'
 import ContactEditModal from 'component/content/contactEditModal'
 import { SearchOutlined } from '@ant-design/icons'
 import Highlighter from 'react-highlight-words'
@@ -81,9 +79,6 @@ const ContactList = () => {
 
     // }
     useEffect(() => {
-        // let today = dayjs().format('MM-YYYY')
-        // let data = JSON.parse(localStorage.getItem('list'))
-        // console.log('hello bello', data)
         getUsers()
     }, [])
 

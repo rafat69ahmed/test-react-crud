@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import PageHeader from 'component/common/pageHeader'
 import Container from 'component/layout/container'
 import { Form, Input, Button, message, Row, Col } from 'antd'
-// import useHttp from 'hook/useHttp'
 import dayjs from 'dayjs'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -12,17 +11,11 @@ const ContactCreate = () => {
             xs: {
                 span: 24
             }
-            // sm: {
-            //     span: 8
-            // }
         },
         wrapperCol: {
             xs: {
                 span: 24
             }
-            // sm: {
-            //     span: 16
-            // }
         }
     }
     const tailFormItemLayout = {
@@ -38,7 +31,6 @@ const ContactCreate = () => {
         }
     }
     const [form] = Form.useForm()
-    // const { http } = useHttp()
     const contacts = JSON.parse(localStorage.getItem('list')) || []
 
     const onFinish = (values) => {
@@ -46,24 +38,9 @@ const ContactCreate = () => {
         values['created_at'] = new Date().toLocaleDateString()
         values['updated_at'] = null
         console.log('Received values of form: ', values)
-        // let cars = []
         contacts.push(values)
-        // localStorage.setItem('name', JSON.stringify(name))
         console.log('cars', contacts)
         localStorage.setItem('list', JSON.stringify(contacts))
-        // const url =
-        //     'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAvEvny-VVw5c7gjAxIc9WAd3AB5E7U18o'
-        // const query = {
-        //     email: values.email,
-        //     password: values.password,
-        //     returnSecureToken: true
-        // }
-        // http.post(url, query)
-        //     .then((res) => {
-        //         console.log('user created', res.data)
-        //         addUserData(values, res.data)
-        //     })
-        //     .catch((err) => console.log(err))
     }
     return (
         <Container style={{ padding: '32px 0' }}>
